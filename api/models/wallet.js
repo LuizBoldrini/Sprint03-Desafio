@@ -36,7 +36,11 @@ module.exports = (sequelize, DataTypes) => {
                 is: {
                     args: /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/,
                     msg: 'O campo cpf precisa ser válido'
-                }
+                        // },
+                        // notIn: {
+                        //   args:  [[, 'bar']],
+                        //   msg: 'Não é permitido cadrastar um cpf que já exista' 
+                },
             }
         },
         birthdate: {

@@ -14,7 +14,12 @@ class WalletController {
         const { address } = req.params
         try {
             const umaWallet = await database.wallet.findOne({ where: { address: Number(address) } })
-            return res.status(200).json(umaWallet)
+            if (umaWallet == null) {
+                res.status(404).json([{ message: `Address ${address} não encontrado!` }])
+            } else {
+                return res.status(200).json(umaWallet)
+            }
+
         } catch (error) {
             return res.status(500).json(error.message)
         }
