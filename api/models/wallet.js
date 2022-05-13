@@ -14,28 +14,15 @@ module.exports = (sequelize, DataTypes) => {
         }
     }
     wallet.init({
-        name: {
-            type: DataTypes.STRING,
-            validate: {
-                len: {
-                    args: [7, 200],
-                    msg: 'O campo name precisa ter 7 ou mais caratcteres'
-                }
-            }
+        address: {
+            allowNull: false,
+            autoIncrement: true,
+            primaryKey: true,
+            type: DataTypes.INTEGER
         },
-        cpf: {
-            type: DataTypes.STRING,
-            validate: {
-                is: /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/,
-                msg: 'O campo cpf precisa ser válido'
-            }
-        },
-        birthdate: {
-            type: DataTypes.DATEONLY,
-            validate: {
-                isBefore: "2004-01-01"
-            }
-        }
+        name: DataTypes.STRING,
+        cpf: DataTypes.STRING,
+        birthdate: DataTypes.DATEONLY
     }, {
         sequelize,
         modelName: 'wallet',
