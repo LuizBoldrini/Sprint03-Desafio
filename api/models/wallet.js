@@ -20,9 +20,35 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             type: DataTypes.INTEGER
         },
-        name: DataTypes.STRING,
-        cpf: DataTypes.STRING,
-        birthdate: DataTypes.DATEONLY
+        name: {
+            type: DataTypes.STRING,
+            validate: {
+                len: {
+                    args: [7, 100],
+                    msg: 'O campo name precisa ter pelo menos 7 caracteres'
+                }
+            }
+
+        },
+        cpf: {
+            type: DataTypes.STRING,
+            validate: {
+                is: {
+                    args: /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/,
+                    msg: 'O campo cpf precisa ser válido'
+                }
+            }
+        },
+        birthdate: {
+            type: DataTypes.DATEONLY,
+            validate: {
+                isBefore: {
+                    args: "2004-11-05",
+                    msg: 'A pessoa precisa ser maior de 18 anos!'
+                }
+            }
+
+        }
     }, {
         sequelize,
         modelName: 'wallet',
