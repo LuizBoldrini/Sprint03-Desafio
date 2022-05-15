@@ -39,11 +39,10 @@ class CoinsController {
     static async deletaCoin(req, res) {
         const { id } = req.params
         try {
-            const umaCoin = await database.Coins.findOne({ where: { id: Number(id) } })
-            if (umaCoin == null) {
+            if (id == null) {
                 res.status(404).json([{ message: `Id ${id} não encontrado!` }])
             } else {
-                await database.Coins.destroy({ where: { id: Number(id) } })
+                await coinsServices.apagaRegistro(Number(id))
                 return res.status(204).json()
             }
 

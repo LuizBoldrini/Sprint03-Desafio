@@ -21,6 +21,10 @@ class Services {
         return database[this.nomeDoModelo]
             .findAndCountAll({ where: {...where }, ...agregadores })
     }
+
+    async apagaRegistro(id) {
+        return database[this.nomeDoModelo].destroy({ where: { id: id } })
+    }
 }
 
 module.exports = Services

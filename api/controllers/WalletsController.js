@@ -1,5 +1,6 @@
 const { WalletsServices } = require('../services')
 const walletsServices = new WalletsServices()
+const database = require('../models')
 
 class WalletController {
     static async pegaTodasWallets(req, res) {
