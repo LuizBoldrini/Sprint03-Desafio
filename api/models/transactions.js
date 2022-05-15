@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             Transactions.belongsTo(models.Wallets, { foreignKey: 'receiveFrom' })
+            Transactions.belongsTo(models.Coins, { foreignKey: 'idCoin' })
+
         }
     }
     Transactions.init({

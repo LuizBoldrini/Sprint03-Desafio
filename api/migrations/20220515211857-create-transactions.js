@@ -23,6 +23,11 @@ module.exports = {
                 type: Sequelize.INTEGER,
                 references: { model: 'Wallets', key: 'address' }
             },
+            idCoin: {
+                allowNull: false,
+                type: Sequelize.INTEGER,
+                references: { model: 'Coins', key: 'id' }
+            },
             currentCotation: {
                 type: Sequelize.DOUBLE
             },
