@@ -1,9 +1,10 @@
-const database = require('../models')
+const { WalletsServices } = require('../services')
+const walletsServices = new WalletsServices()
 
 class WalletController {
     static async pegaTodasWallets(req, res) {
         try {
-            const todasWallets = await database.Wallets.findAll()
+            const todasWallets = await walletsServices.pegaTodosOsRegistros()
             return res.status(200).json(todasWallets)
         } catch (error) {
             return res.status(500).json(error.message)
@@ -13,7 +14,7 @@ class WalletController {
     static async pegaUmaWallet(req, res) {
         const { address } = req.params
         try {
-            const umaWallet = await database.Wallets.findOne({ where: { address: Number(address) } })
+            const umaWallet = await walletsServices.pegaUmRegistro({ address })
             if (umaWallet == null) {
                 res.status(404).json([{ message: `Address ${address} não encontrado!` }])
             } else {
@@ -28,7 +29,7 @@ class WalletController {
     static async criaWallet(req, res) {
         const novaWallet = req.body
         try {
-            const novaWalletCriada = await database.Wallets.create(novaWallet)
+            const novaWalletCriada = await walletsServices.criaRegistro(novaWallet)
             return res.status(201).json(novaWalletCriada)
         } catch (error) {
             return res.status(500).json(error.message)

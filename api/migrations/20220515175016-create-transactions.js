@@ -12,6 +12,7 @@ module.exports = {
                 type: Sequelize.DOUBLE
             },
             datetime: {
+                allowNull: false,
                 type: Sequelize.DATE
             },
             sendTo: {

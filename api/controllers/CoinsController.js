@@ -1,9 +1,10 @@
-const database = require('../models')
+const { CoinsServices } = require('../services')
+const coinsServices = new CoinsServices
 
 class CoinsController {
     static async pegaTodasCoins(req, res) {
         try {
-            const todasCoins = await database.Coins.findAll()
+            const todasCoins = await coinsServices.pegaTodosOsRegistros()
             return res.status(200).json(todasCoins)
         } catch (error) {
             return res.status(500).json(error.message)
@@ -13,7 +14,7 @@ class CoinsController {
     static async pegaUmaCoin(req, res) {
         const { id } = req.params
         try {
-            const umaCoin = await database.Coins.findOne({ where: { id: Number(id) } })
+            const umaCoin = await coinsServices.pegaUmRegistro({ id })
             if (umaCoin == null) {
                 res.status(404).json([{ message: `Address ${id} não encontrado!` }])
             } else {
@@ -28,7 +29,7 @@ class CoinsController {
     static async criaCoin(req, res) {
         const novaCoin = req.body
         try {
-            const novaCoinCriada = await database.Coins.create(novaCoin)
+            const novaCoinCriada = await coinsServices.criaRegistro(novaCoin)
             return res.status(201).json(novaCoinCriada)
         } catch (error) {
             return res.status(500).json(error.message)
