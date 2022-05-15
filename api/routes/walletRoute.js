@@ -7,6 +7,7 @@ router
     .get('/api/v1/wallet', WalletController.pegaTodasWallets)
     .get('/api/v1/wallet/:address', WalletController.pegaUmaWallet)
     .post('/api/v1/wallet', WalletController.criaWallet)
+    .delete('/api/v1/wallet/:address', WalletController.deletaWallet)
 
 
 module.exports = router
